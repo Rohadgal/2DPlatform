@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     int creditsScene = 4;
     int lastLevelScene = 3;
 
+    bool isCoroutineActivated;
+
     private void Awake() {
         if (canvas != null && SceneManager.GetActiveScene().buildIndex != mainMenuScene) {
             canvas.SetActive(false);
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        isCoroutineActivated = false;
         s_instance = this;
         m_gameState = GameState.None;
     }
@@ -57,13 +60,17 @@ public class GameManager : MonoBehaviour
             canvas.SetActive(true);
             winUI.SetActive(true);
         }
-        if (SceneManager.GetActiveScene().name == "LevelThree1") {
-            StartCoroutine(openCredits());
-        }
+
+        //if (SceneManager.GetActiveScene().name == "LevelThree1" && !isCoroutineActivated) {
+        //    isCoroutineActivated=true;
+        //    //canvas.SetActive(true);
+        //    //StartCoroutine(openCredits());
+        //    Debug.LogError("YAAAA");
+        //}
     }
 
     IEnumerator openCredits() {
-        float waitTimeForCredits = 4f;
+        //float waitTimeForCredits = 4f;
         yield return new WaitForSeconds(4f);
         winUI.SetActive(false );
         creditsUI.SetActive(true);
@@ -99,12 +106,16 @@ public class GameManager : MonoBehaviour
 
     public void changeScene() {
         levelIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("Manager ChangeScene");
 
-        if(SceneManager.GetActiveScene().buildIndex == lastLevelScene) {
+        if(SceneManager.GetActiveScene().name == "LevelThree1") {
+            m_gameState = GameState.GameFinished;
+            Debug.Log("Corutina!!!!");
             StartCoroutine (openCredits());
             return;
         }
-        
+
+        Debug.Log("Hasta aca llegó");
         if(levelIndex < SceneManager.sceneCountInBuildSettings - 1) {
             levelIndex++;
             SceneManager.LoadScene(levelIndex);

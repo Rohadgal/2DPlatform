@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
             //Debug.LogWarning("FireBall");
             flip();
 
-        Debug.Log("transform.right: "+transform.right);
+        //Debug.Log("transform.right: "+transform.right);
     }
 
     IEnumerator SelfDestroy()
@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour
         Vector2 directionToPlayer = PlayerController.instance.transform.position - transform.position;
 
         float angleToPlayer = Mathf.Acos(Vector2.Dot(transform.right, directionToPlayer) / (Magnitud(transform.right) * Magnitud(directionToPlayer))) * Mathf.Rad2Deg;
-        Debug.LogWarning("angle to player: " + angleToPlayer);
+        //Debug.LogWarning("angle to player: " + angleToPlayer);
         if (angleToPlayer <= viewAngle) // checar primero distancia del jugador antes de comenzar a calcular el ángulo al que se encuentra. Solución encontrado con ayuda de chatgpt.
         {
             if (Vector2.Dot(transform.right, directionToPlayer) > 0) {

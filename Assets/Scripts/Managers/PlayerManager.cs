@@ -26,7 +26,7 @@ public class PlayerManager : MonoBehaviour {
 
     private void Update() {
         if (playerState == PlayerState.Dead) {
-            Debug.Log("Se acabó el juego");
+            //Debug.Log("Se acabó el juego");
             //GameManager.s_instance.changeGameSate(GameState.GameOver);
             LevelManager.s_instance.changeLevelState(LevelState.GameOver);
         }
@@ -83,7 +83,7 @@ public class PlayerManager : MonoBehaviour {
             return false;
         }
 
-        Debug.LogWarning("You died");
+        //Debug.LogWarning("You died");
         StartCoroutine(DestroyPlayer());
         return true;
     }

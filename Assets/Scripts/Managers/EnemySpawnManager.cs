@@ -81,7 +81,7 @@ public class EnemySpawnManager : MonoBehaviour
                 pipePool.Enqueue(tempGO);
             }
             previousPosition = spawnPosition;
-            Debug.Log("SpawnPos: " + LevelManager.s_instance.getEnemySpawnArea());
+            //Debug.Log("SpawnPos: " + LevelManager.s_instance.getEnemySpawnArea());
             //if (spawnParticles != null) {
             //    spawnParticles.Play();
             //}

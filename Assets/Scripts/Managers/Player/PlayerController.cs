@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour {
             jump();
         }
 
-        Debug.Log("IS grounded: " + isGrounded);
+        //Debug.Log("IS grounded: " + isGrounded);
     }
     void jump() {
         if (!isGrounded) {

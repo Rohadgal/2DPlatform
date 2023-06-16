@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     private void Update() {
         if (m_levelState == LevelState.LevelFinished) {
             GameManager.s_instance.changeScene();
+            Debug.Log("LLegamos aca");
         }
         if (m_levelState == LevelState.GameOver) {
             GameManager.s_instance.changeGameSate(GameState.GameOver);
