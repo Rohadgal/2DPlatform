@@ -24,9 +24,15 @@ public class PlayerManager : MonoBehaviour {
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update() {
+    private void Update() {
+        if (playerState == PlayerState.Dead) {
+            Debug.Log("Se acabó el juego");
+            //GameManager.s_instance.changeGameSate(GameState.GameOver);
+            LevelManager.s_instance.changeLevelState(LevelState.GameOver);
+        }
 
+        Debug.Log("IS DEAD: " + IsDead());
+       
     }
 
     public void ChangePlayerState(PlayerState newState) {
@@ -63,18 +69,30 @@ public class PlayerManager : MonoBehaviour {
             default: break;
         }
     }
-
     private void resetAnimatorParameters() {
         foreach (AnimatorControllerParameter parameter in animator.parameters) {
-            if (parameter.type == AnimatorControllerParameterType.Bool)
+            if (parameter.type == AnimatorControllerParameterType.Bool) {
                 animator.SetBool(parameter.name, false);
+            }
         }
     }
+    public PlayerState GetState(){ return playerState; }
 
-    public PlayerState GetState(){return playerState;}
-   
+    private bool IsDead() {
+        if (PlayerManager.instance.GetState() != PlayerState.Dead) {
+            return false;
+        }
+
+        Debug.LogWarning("You died");
+        StartCoroutine(DestroyPlayer());
+        return true;
+    }
+
+    IEnumerator DestroyPlayer() {
+        yield return new WaitForSeconds(2.5f);
+        Destroy(gameObject);
+    }
 }
-
 
 public enum PlayerState {
     None, 

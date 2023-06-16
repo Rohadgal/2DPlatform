@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -35,30 +33,22 @@ public class PlayerController : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         isFacingRight = true;
         isGrounded = false;
-        isShooting = false;
-        
+        isShooting = false;   
     }
 
     private void FixedUpdate() {
-
-        if(!IsDead()){
-
-            isGrounded = Physics2D.OverlapCircle(footPosition.position, footRadious, whatIsGround) &&
-                rb2d. velocity.y < 0.1f;
-
+        if(PlayerManager.instance.GetState() != PlayerState.Dead){
+            isGrounded = Physics2D.OverlapCircle(footPosition.position, footRadious, whatIsGround) && rb2d. velocity.y < 0.1f;
             HorizontalMovement();
             VerticalMovement();
             return;
         } 
         rb2d.velocity = Vector2.zero;
         //rb2d.gravityScale = 0f;
-       
-
     }
 
     private void HorizontalMovement() {
         float xMove = Input.GetAxisRaw("Horizontal");
-
         rb2d.velocity = new Vector2(xMove * xSpeed, rb2d.velocity.y);
         if ((xMove < 0 && isFacingRight) || (xMove > 0 && !isFacingRight)) {
             flip();
@@ -88,13 +78,6 @@ public class PlayerController : MonoBehaviour {
             jump();
         }
 
-        if(IsDead())
-        {
-            
-            Debug.Log("Se acabó el juego");
-        }
-
-        Debug.Log("IS DEAD: " + IsDead());
         Debug.Log("IS grounded: " + isGrounded);
     }
     void jump() {
@@ -119,18 +102,5 @@ public class PlayerController : MonoBehaviour {
         isShooting = !isShooting;
     }
 
-    private bool IsDead(){
-        if(PlayerManager.instance.GetState() != PlayerState.Dead){
-            return false;
-        }
-       
-        Debug.LogWarning("You died");
-        StartCoroutine(DestroyPlayer());
-        return true;
-    }
-
-    IEnumerator DestroyPlayer(){
-         yield return new WaitForSeconds(2.5f);
-         Destroy(gameObject);
-    }
+    
 }

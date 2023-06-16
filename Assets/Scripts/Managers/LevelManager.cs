@@ -1,21 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject canvas;
+    public static LevelManager s_instance;
+
+    LevelState m_levelState;
+    float time = 2;
+    float secondsToWait = 4f;
+    int enemySpawnArea = 0;
+
     private void Awake() {
-        if(canvas != null) canvas.SetActive(false);
-    }
-    private void Update() {
-        if(PlayerManager.instance.GetState() == PlayerState.Dead)
-        {
-            GameOver();
+        if (FindObjectOfType<LevelManager>() != null &&
+            FindObjectOfType<LevelManager>().gameObject != gameObject) {
+            Destroy(gameObject);
+        } else {
+            s_instance = this;
         }
     }
 
-    void GameOver(){
-        if(canvas != null) canvas.SetActive(true);
+    private void Update() {
+        if (m_levelState == LevelState.LevelFinished) {
+            GameManager.s_instance.changeScene();
+        }
+        if (m_levelState == LevelState.GameOver) {
+            GameManager.s_instance.changeGameSate(GameState.GameOver);
+        }
+    }
+
+    public void changeLevelState(LevelState state) {
+        m_levelState = state;
+    }
+
+    public float getTime() { return time; }
+
+    public float getSecondsToWait() { return secondsToWait; }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.CompareTag("Player")) {
+            enemySpawnArea++;
+        }
+    }
+    public int getEnemySpawnArea() {  return enemySpawnArea; }
+
+    public void setEnemySpawnArea(int t_spawnArea) {
+        enemySpawnArea = t_spawnArea;
     }
 }
+
+
+public enum LevelState {
+    None,
+    Continue,
+    LevelFinished,
+    GameOver
+}
+

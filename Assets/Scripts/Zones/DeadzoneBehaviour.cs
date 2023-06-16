@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DeadzoneBehaviour : MonoBehaviour
@@ -8,6 +6,5 @@ public class DeadzoneBehaviour : MonoBehaviour
         if (other.CompareTag("Player")) {
             PlayerManager.instance.ChangePlayerState(PlayerState.Dead);
         }
-        
     }
 }

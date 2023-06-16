@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4005338851030790119}
   - component: {fileID: 4005338851030790118}
   - component: {fileID: 4005338851030789914}
-  - component: {fileID: 4005338851030790117}
   - component: {fileID: 4005338851030789912}
   - component: {fileID: 4005338851030789915}
   - component: {fileID: 3597781635988650957}
@@ -136,18 +135,6 @@ MonoBehaviour:
   jumpForce: 0
   footRadious: 0
   footPosition: {fileID: 4005338851030790116}
---- !u!114 &4005338851030790117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4005338851030790113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7347de8c48b014742a1c1e3417807acd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &4005338851030789912
 Rigidbody2D:
   serializedVersion: 4

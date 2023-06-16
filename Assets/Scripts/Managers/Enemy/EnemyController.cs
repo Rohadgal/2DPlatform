@@ -1,69 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-
 
 public class EnemyController : MonoBehaviour
 {
     #region Public
     public static EnemyController instance;
-    public LayerMask whatIsGround;
+    //public LayerMask whatIsGround;
     public Transform playerPosition;
-    public float fireRange = 1f;
+    //public float fireRange = 1f;
     public float viewAngle = 90f;
+ 
     #endregion
 
     #region Private
-    Rigidbody2D rb2d;
+    //Rigidbody2D rb2d;
     bool isFacingLeft, isGrounded; // isShooting
-    float xMove, yMove, angleToPlayer;
-    Vector2 aVector, bVector;
+    float angleToPlayer;
 
     ParticleSystem particles;
 
     Vector2 directionToPlayer;
     #endregion
 
-    #region Serialize Fields
-    [SerializeField] float xSpeed, jumpForce, footRadious;
-    [SerializeField] Transform footPosition;
-    #endregion
-
-    private void Awake() {
-        instance = this;
-    }
-    
     void Start() {
-        rb2d = GetComponent<Rigidbody2D>();
+   
         particles = GetComponent<ParticleSystem>();
-        isFacingLeft = true;
-        isGrounded = false;
-        //isShooting = false;
-
-        aVector = new Vector2(1,0);
-        bVector = new Vector2(-3,4);
-        particles.Play();
+   
+        //particles.Play();
         StartCoroutine(SelfDestroy());
     }
 
     private void FixedUpdate() {
-        isGrounded = Physics2D.OverlapCircle(footPosition.position, footRadious, whatIsGround);
-
-        if(IsPlayerInFireRange())
-        {
+       // isGrounded = Physics2D.OverlapCircle(footPosition.position, footRadious, whatIsGround);
             //Debug.LogWarning("FireBall");
             flip();
-        }
+
         Debug.Log("transform.right: "+transform.right);
-
-
     }
 
     IEnumerator SelfDestroy()
     {
-        yield return new WaitForSeconds(3);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(LevelManager.s_instance.getSecondsToWait());
+        gameObject.SetActive(false);
     }
 
     public float Magnitud(Vector2 mag)
@@ -77,31 +55,20 @@ public class EnemyController : MonoBehaviour
         return resultado;
     }
 
-    public bool IsPlayerInFireRange()
-    {
-        Vector2 directionToPlayer = playerPosition.position -transform.position;
+    void flip() {
+        if(GameManager.s_instance.getGameState() == GameState.GameOver) {
+            return;
+        }
+        Vector2 directionToPlayer = PlayerController.instance.transform.position - transform.position;
 
-        float angleToPlayer = Mathf.Acos(Vector2.Dot( transform.right, directionToPlayer) / (Magnitud(transform.right) * Magnitud(directionToPlayer))) * Mathf.Rad2Deg;
-        if(angleToPlayer <= viewAngle) // checar primero distancia del jugador antes de comenzar a calcular el ángulo al que se encuentra. Solución encontrado con ayuda de chatgpt.
+        float angleToPlayer = Mathf.Acos(Vector2.Dot(transform.right, directionToPlayer) / (Magnitud(transform.right) * Magnitud(directionToPlayer))) * Mathf.Rad2Deg;
+        Debug.LogWarning("angle to player: " + angleToPlayer);
+        if (angleToPlayer <= viewAngle) // checar primero distancia del jugador antes de comenzar a calcular el ángulo al que se encuentra. Solución encontrado con ayuda de chatgpt.
         {
-     
-
-            
-           // Debug.Log("angle to player: " + angleToPlayer);
-            if(Vector2.Dot(transform.right, directionToPlayer) > 0)
-            {
-                return true;  
-                
+            if (Vector2.Dot(transform.right, directionToPlayer) > 0) {
+                transform.Rotate(0, 180, 0);
             }
         }
-        return false;
-
-    }
-
-    void flip() {
-        transform.Rotate(0, 180, 0);
-        isFacingLeft = !isFacingLeft;
-        //Debug.Log("SPIN");
     }
 }
 
