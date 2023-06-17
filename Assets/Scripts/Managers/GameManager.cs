@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        isCoroutineActivated = false;
+
         s_instance = this;
         m_gameState = GameState.None;
     }
