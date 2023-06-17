@@ -38,9 +38,9 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate() {
         if(PlayerManager.instance.GetState() != PlayerState.Dead){
-            isGrounded = Physics2D.OverlapCircle(footPosition.position, footRadious, whatIsGround) && rb2d. velocity.y < 0.1f;
+            isGrounded = Physics2D.OverlapCircle(footPosition.position, footRadious, whatIsGround) && rb2d.velocity.y < 0.1f;
             HorizontalMovement();
-            VerticalMovement();
+            verticalMovement();
             return;
         } 
         rb2d.velocity = Vector2.zero;
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void VerticalMovement() {
+    void verticalMovement() {
         if (isGrounded) {
             return;
         }

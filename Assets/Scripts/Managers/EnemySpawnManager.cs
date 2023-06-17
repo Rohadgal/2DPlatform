@@ -39,7 +39,7 @@ public class EnemySpawnManager : MonoBehaviour
         //spawnPosition = Random.Range(0, spawnPoints.Length);
         while (GameManager.s_instance.getGameState() != GameState.GameOver) {
 
-            switch(LevelManager.s_instance.getEnemySpawnArea()) { // Los casos se checan en pares porque el player tiene dos colliders.
+            switch(LevelManager.s_instance.getEnemySpawnArea()) { 
                 case 0:
                     while (spawnPosition == previousPosition) {
                         spawnPosition = Random.Range(0, 4);

@@ -6,19 +6,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager s_instance;
 
-    public GameObject canvas;
-    public GameObject winUI;
-    public GameObject gameOverUI;
-    public GameObject creditsUI;
+    public GameObject canvas, winUI, gameOverUI, creditsUI;
     private GameState m_gameState;
 
     //public bool isGameOver, isStarted;
     int levelIndex;
     int mainMenuScene = 0;
-    int creditsScene = 4;
-    int lastLevelScene = 3;
+    //int creditsScene = 4;
+    //int lastLevelScene = 3;
 
-    bool isCoroutineActivated;
+    //bool isCoroutineActivated;
 
     private void Awake() {
         if (canvas != null && SceneManager.GetActiveScene().buildIndex != mainMenuScene) {
@@ -30,7 +27,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        isCoroutineActivated = false;
+        //isCoroutineActivated = false;
         s_instance = this;
         m_gameState = GameState.None;
     }
@@ -106,16 +103,16 @@ public class GameManager : MonoBehaviour
 
     public void changeScene() {
         levelIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log("Manager ChangeScene");
+        //Debug.Log("Manager ChangeScene");
 
         if(SceneManager.GetActiveScene().name == "LevelThree1") {
             m_gameState = GameState.GameFinished;
-            Debug.Log("Corutina!!!!");
+            //Debug.Log("Corutina!!!!");
             StartCoroutine (openCredits());
             return;
         }
 
-        Debug.Log("Hasta aca llegó");
+        //Debug.Log("Hasta aca llegó");
         if(levelIndex < SceneManager.sceneCountInBuildSettings - 1) {
             levelIndex++;
             SceneManager.LoadScene(levelIndex);

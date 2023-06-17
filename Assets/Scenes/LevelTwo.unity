@@ -28649,7 +28649,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224301813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.448965, y: -0.59, z: -10}
+  m_LocalPosition: {x: 4.455636, y: -0.59, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -32126,7 +32126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.100256, y: 1.7394199, z: -10}
+  m_LocalPosition: {x: 10.142351, y: 1.74249, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -111688,6 +111688,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1696068449}
     m_Modifications:
+    - target: {fileID: 4165502592911457379, guid: 3fee15ebc5fc8264c9d3dbe671a6a9ee, type: 3}
+      propertyPath: m_Size.y
+      value: 13.330471
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165502592911457379, guid: 3fee15ebc5fc8264c9d3dbe671a6a9ee, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.27093506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165502592911457404, guid: 3fee15ebc5fc8264c9d3dbe671a6a9ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4165502592966887432, guid: 3fee15ebc5fc8264c9d3dbe671a6a9ee, type: 3}
       propertyPath: m_Name
       value: SpawnAreas
