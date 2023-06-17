@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     //int creditsScene = 4;
     //int lastLevelScene = 3;
 
-    //bool isCoroutineActivated;
+    bool isCoroutineActivated;
 
     private void Awake() {
         if (canvas != null && SceneManager.GetActiveScene().buildIndex != mainMenuScene) {
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        //isCoroutineActivated = false;
+        isCoroutineActivated = false;
         s_instance = this;
         m_gameState = GameState.None;
     }
@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
         if (m_gameState == GameState.GameOver) {
             gameOver();
         }
-        if (m_gameState == GameState.GameFinished) {
+        if (m_gameState == GameState.GameFinished && !isCoroutineActivated) {
+            isCoroutineActivated=true;
             gameFinished();
         }
     }

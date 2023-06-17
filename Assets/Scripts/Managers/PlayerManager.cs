@@ -82,7 +82,6 @@ public class PlayerManager : MonoBehaviour {
         if (PlayerManager.instance.GetState() != PlayerState.Dead) {
             return false;
         }
-
         //Debug.LogWarning("You died");
         StartCoroutine(DestroyPlayer());
         return true;

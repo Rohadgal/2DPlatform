@@ -36,10 +36,13 @@ public class EnemySpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
+        
         //spawnPosition = Random.Range(0, spawnPoints.Length);
         while (GameManager.s_instance.getGameState() != GameState.GameOver) {
-
-            switch(LevelManager.s_instance.getEnemySpawnArea()) { 
+            if (GameManager.s_instance.getGameState() == GameState.GameFinished) {
+                break;
+            }
+            switch (LevelManager.s_instance.getEnemySpawnArea()) { 
                 case 0:
                     while (spawnPosition == previousPosition) {
                         spawnPosition = Random.Range(0, 4);
