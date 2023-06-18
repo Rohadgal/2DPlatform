@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour {
             LevelManager.s_instance.changeLevelState(LevelState.GameOver);
         }
 
-        Debug.Log("IS DEAD: " + IsDead());
+        //Debug.Log("IS DEAD: " + IsDead());
        
     }
 
