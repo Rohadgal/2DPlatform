@@ -22,13 +22,16 @@ public class GameManager : MonoBehaviour
             canvas.SetActive(false);
             DontDestroyOnLoad(gameObject);
         }
-        if (FindObjectOfType<GameManager>() != null &&
-            FindObjectOfType<GameManager>().gameObject != gameObject) {
-            Destroy(gameObject);
-            return;
+        if (s_instance != null && s_instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            s_instance = this;
         }
 
-        s_instance = this;
+        //s_instance = this;
         m_gameState = GameState.None;
     }
 
@@ -113,7 +116,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        //Debug.Log("Hasta aca llegó");
+        //Debug.Log("Hasta aca lleg?");
         if(levelIndex < SceneManager.sceneCountInBuildSettings - 1) {
             levelIndex++;
             SceneManager.LoadScene(levelIndex);

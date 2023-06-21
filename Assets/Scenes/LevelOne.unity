@@ -5990,7 +5990,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224301813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.446849, y: -0.59000015, z: -10}
+  m_LocalPosition: {x: 4.4519215, y: -0.5900004, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9467,7 +9467,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.6612425, y: 2.22265, z: -10}
+  m_LocalPosition: {x: 5.6737165, y: 2.2602398, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47016,7 +47016,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1741118365}
   - component: {fileID: 1741118366}
-  - component: {fileID: 1741118367}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -47135,18 +47134,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1741118367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741118364}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b9bdd1a8f8513a4da152fd552339131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1911572126
 GameObject:
   m_ObjectHideFlags: 0
