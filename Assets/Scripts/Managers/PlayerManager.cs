@@ -16,6 +16,13 @@ public class PlayerManager : MonoBehaviour {
     PlayerState playerState;
 
     private void Awake() {
+        if (FindObjectOfType<PlayerManager>() != null &&
+            FindObjectOfType<PlayerManager>().gameObject != gameObject)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
         instance = this;
         playerState = PlayerState.None;
     }
