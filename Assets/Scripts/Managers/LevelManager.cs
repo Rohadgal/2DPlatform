@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 
 public class LevelManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class LevelManager : MonoBehaviour
     float time = 2;
     float secondsToWait = 4f;
     int enemySpawnArea = 0;
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
 
     private void Awake() {
         if (FindObjectOfType<LevelManager>() != null &&
@@ -17,6 +19,14 @@ public class LevelManager : MonoBehaviour
         } else {
             s_instance = this;
         }
+    }
+
+    private void Start()
+    {
+        GameManager.s_instance.changeGameSate(GameState.Playing);
+        PlayerManager.instance.ChangePlayerState(PlayerState.Idle);
+        virtualCamera.Follow = PlayerManager.instance.transform;
+        
     }
 
     private void Update() {

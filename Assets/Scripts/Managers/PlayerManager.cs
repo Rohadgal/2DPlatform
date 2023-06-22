@@ -11,11 +11,12 @@ public class PlayerManager : MonoBehaviour {
     /// </summary>
     public static PlayerManager instance;
 
-    Animator animator;
+    Animator m_animator;
 
     PlayerState playerState;
 
     private void Awake() {
+        m_animator = GetComponent<Animator>();
         if (FindObjectOfType<PlayerManager>() != null &&
             FindObjectOfType<PlayerManager>().gameObject != gameObject)
         {
@@ -28,7 +29,7 @@ public class PlayerManager : MonoBehaviour {
     }
     // Start is called before the first frame update
     void Start() {
-        animator = GetComponent<Animator>();
+        m_animator = GetComponent<Animator>();
     }
 
     private void Update() {
@@ -55,31 +56,31 @@ public class PlayerManager : MonoBehaviour {
             case PlayerState.None:
                 break;
             case PlayerState.Idle:
-                animator.SetBool("isIdle", true);
+                m_animator.SetBool("isIdle", true);
                 break;
             case PlayerState.Running:
-                animator.SetBool("isRunning", true);
+                m_animator.SetBool("isRunning", true);
                 break;
             case PlayerState.Jumping:
-                animator.SetBool("isJumping", true);
+                m_animator.SetBool("isJumping", true);
                 break;
             case PlayerState.JumpFall:
-                animator.SetBool("isFalling", true);
+                m_animator.SetBool("isFalling", true);
                 break;
             case PlayerState.FreeFall:
-                animator.SetBool("isFalling", true);
+                m_animator.SetBool("isFalling", true);
                 break;
             case PlayerState.Dead:
-                animator.SetBool("isDead", true);
+                m_animator.SetBool("isDead", true);
 
                 break;
             default: break;
         }
     }
     private void resetAnimatorParameters() {
-        foreach (AnimatorControllerParameter parameter in animator.parameters) {
+        foreach (AnimatorControllerParameter parameter in m_animator.parameters) {
             if (parameter.type == AnimatorControllerParameterType.Bool) {
-                animator.SetBool(parameter.name, false);
+                m_animator.SetBool(parameter.name, false);
             }
         }
     }
