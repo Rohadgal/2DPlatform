@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class FourthAreaComponent : MonoBehaviour
 {
+    bool eventRaised = false;
+
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.CompareTag("Player")) {
-            LevelManager.s_instance.setEnemySpawnArea(3);
-            Debug.Log("last trigger");
+        if (collision.CompareTag("Player") && !eventRaised) {
+            EventManager.RaiseEvent();
+            eventRaised = true;
         }
     }
+
+
 }

@@ -4,10 +4,9 @@ using Cinemachine;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager s_instance;
 
+    public static LevelManager s_instance;
     LevelState m_levelState;
-    float time = 2;
     float secondsToWait = 4f;
     int enemySpawnArea = 0;
     [SerializeField] CinemachineVirtualCamera virtualCamera;
@@ -25,8 +24,11 @@ public class LevelManager : MonoBehaviour
     {
         GameManager.s_instance.changeGameSate(GameState.Playing);
         PlayerManager.instance.ChangePlayerState(PlayerState.Idle);
-        virtualCamera.Follow = PlayerManager.instance.transform;
-        
+        if (PlayerManager.instance != null) {
+            virtualCamera.Follow = PlayerManager.instance.transform;
+        }
+        EventManager.MyEvent += changeEnemySpawnArea;
+
     }
 
     private void Update() {
@@ -43,20 +45,18 @@ public class LevelManager : MonoBehaviour
         m_levelState = state;
     }
 
-    public float getTime() { return time; }
 
     public float getSecondsToWait() { return secondsToWait; }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.CompareTag("Player")) {
-            enemySpawnArea++;
-        }
-    }
     public int getEnemySpawnArea() {  return enemySpawnArea; }
 
-    public void setEnemySpawnArea(int t_spawnArea) {
-        enemySpawnArea = t_spawnArea;
+    private void changeEnemySpawnArea() {
+        enemySpawnArea++;
     }
+    private void OnDestroy() {
+        EventManager.MyEvent -= changeEnemySpawnArea;
+    }
+
 }
 
 

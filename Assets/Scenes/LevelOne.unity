@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1103e337cb49bec41ad6f3c3fa1dcb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 224301814}
 --- !u!1 &48594748
 GameObject:
   m_ObjectHideFlags: 0
@@ -5990,7 +5991,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224301813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.4519215, y: -0.5900004, z: -10}
+  m_LocalPosition: {x: 3.5593357, y: -0.59000015, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9467,7 +9468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.6737165, y: 2.2602398, z: -10}
+  m_LocalPosition: {x: 4.440969, y: 2.01966, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42032,6 +42033,7 @@ MonoBehaviour:
   - {fileID: 1659779719}
   - {fileID: 1362972659}
   - {fileID: 220974257}
+  enemyType: Bat
   objectPoolLimit: 0
 --- !u!82 &1648108062
 AudioSource:

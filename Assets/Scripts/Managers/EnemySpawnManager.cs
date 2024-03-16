@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnManager : MonoBehaviour
+public class EnemySpawnManager : MonoBehaviour, ISpawnable
 {
     public GameObject enemyPrefab;
 
     public Transform[] spawnPoints;
 
+    public string enemyType = "Bat";
+
     //public ParticleSystem spawnParticles;
 
-    [SerializeField] int objectPoolLimit;
+    //[SerializeField]
+    int objectPoolLimit = 1;
 
     private AudioSource audioSource;
     //private float secondsToWait = 4;
 
-    Queue<GameObject> pipePool;
+    Queue<GameObject> enemyPool;
     bool canInstantiate = true;
 
     int previousPosition;
@@ -31,7 +34,19 @@ public class EnemySpawnManager : MonoBehaviour
         if (spawnPoints != null && enemyPrefab != null) {
             StartCoroutine(SpawnEnemies());
         }
-        pipePool = new Queue<GameObject>();
+        enemyPool = new Queue<GameObject>();
+
+        EventManager.MyEvent += changeObjectPoolLimit;
+    }
+
+    public GameObject spawnEnemy(Vector3 position) {
+        GameObject enemyPrefab = EnemyFactory.createEnemy(enemyType);
+        if (enemyPrefab != null) {
+            return Instantiate(enemyPrefab, position, Quaternion.identity);
+        } else {
+            Debug.LogError("Failed to spawn enemy. Enemy prefab is null.");
+            return null;
+        }
     }
 
     IEnumerator SpawnEnemies()
@@ -73,21 +88,35 @@ public class EnemySpawnManager : MonoBehaviour
             }
 
             if(canInstantiate) {
-                pipePool.Enqueue(Instantiate(enemyPrefab, spawnPoints[spawnPosition].transform.position, Quaternion.identity));
-                if (pipePool.Count > objectPoolLimit) {
+                enemyPool.Enqueue(spawnEnemy(spawnPoints[spawnPosition].transform.position));
+               // enemyPool.Enqueue(Instantiate(enemyPrefab, spawnPoints[spawnPosition].transform.position, Quaternion.identity));
+                if (enemyPool.Count >= objectPoolLimit) {
                     canInstantiate = false;
                 } 
             } else {
-                GameObject tempGO = pipePool.Dequeue();
+                GameObject tempGO = enemyPool.Dequeue();
                 tempGO.transform.position = spawnPoints[spawnPosition].transform.position;
                 tempGO.SetActive(true);
-                pipePool.Enqueue(tempGO);
+                enemyPool.Enqueue(tempGO);
             }
             previousPosition = spawnPosition;
             //Debug.Log("SpawnPos: " + LevelManager.s_instance.getEnemySpawnArea());
             //if (spawnParticles != null) {
             //    spawnParticles.Play();
             //}
+        }
+    }
+
+    private void OnDestroy() {
+        // Asegúrate de desuscribir el método cuando el objeto se destruye para evitar fugas de memoria
+        EventManager.MyEvent -= changeObjectPoolLimit;
+    }
+
+    void changeObjectPoolLimit() {
+        if (objectPoolLimit < 4) {
+            objectPoolLimit++;
+            Debug.Log(objectPoolLimit);
+            canInstantiate = true;
         }
     }
 }
