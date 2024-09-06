@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour, ISpawnable
 {
-    public GameObject enemyPrefab;
 
     public Transform[] spawnPoints;
 
@@ -31,7 +30,7 @@ public class EnemySpawnManager : MonoBehaviour, ISpawnable
 
     void Start()
     {
-        if (spawnPoints != null && enemyPrefab != null) {
+        if (spawnPoints != null) {
             StartCoroutine(SpawnEnemies());
         }
         enemyPool = new Queue<GameObject>();
